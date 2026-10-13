@@ -1,15 +1,15 @@
 from faster_whisper import WhisperModel
 
 
-def main():
+def main(file_name : str):
     model = WhisperModel(
-        "medium",
+        "small",
         device="cpu",
         compute_type="int8"
     )
 
     segments, info = model.transcribe(
-        "input/sample.mp3",
+        f"input/{file_name}.mp3",
         language="ja"
     )
 
