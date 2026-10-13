@@ -15,12 +15,14 @@ def main(file_name : str):
 
     print(f"Detected language: {info.language}")
 
-    for idx, segment in enumerate(segments, start=1):
-        print(
-            f"{idx}\n"
-            f"{format_time(segment.start)} --> {format_time(segment.end)}\n"
-            f"{segment.text}\n"
-        )
+    with open(f'output/{file_name}.srt', 'w') as f:
+
+        for idx, segment in enumerate(segments, start=1):
+            f.write(
+                f"{idx}\n"
+                f"{format_time(segment.start)} --> {format_time(segment.end)}\n"
+                f"{segment.text}\n\n"
+            )
 
 def format_time(seconds):
     ms = round(seconds * 1000)
