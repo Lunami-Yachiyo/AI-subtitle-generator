@@ -3,13 +3,13 @@ from faster_whisper import WhisperModel
 
 def main():
     model = WhisperModel(
-        "small",
+        "medium",
         device="cpu",
         compute_type="int8"
     )
 
     segments, info = model.transcribe(
-        "sample.mp3",
+        "input/sample.mp3",
         language="ja"
     )
 

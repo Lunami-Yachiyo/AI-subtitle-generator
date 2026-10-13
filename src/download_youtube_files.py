@@ -2,7 +2,7 @@ import yt_dlp
 from pathlib import Path
 
 
-def main(url: str = "", output_dir: str = "downloads"):
+def main(url: str = "", output_dir: str = "input"):
     url = "https://www.youtube.com/watch?v=5HQoswdE6iU"
 
     output_path = Path(output_dir)
@@ -13,8 +13,9 @@ def main(url: str = "", output_dir: str = "downloads"):
         "format": "bestaudio/best",
 
         # 文件保存格式：
-        # downloads/视频标题.扩展名
-        "outtmpl": str(output_path / "%(title)s.%(ext)s"),
+        # input/视频标题.扩展名
+        #"outtmpl": str(output_path / "%(title)s.%(ext)s"),
+        "outtmpl": str(output_path / "sample.%(ext)s"),
 
         # 用 ffmpeg 转换为 mp3
         "postprocessors": [
