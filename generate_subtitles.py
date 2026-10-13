@@ -15,8 +15,21 @@ def main(file_name : str):
 
     print(f"Detected language: {info.language}")
 
-    for segment in segments:
+    for idx, segment in enumerate(segments, start=1):
         print(
-            f"[{segment.start:.2f} -> {segment.end:.2f}] "
-            f"{segment.text}"
+            f"{idx}\n"
+            f"{format_time(segment.start)} --> {format_time(segment.end)}\n"
+            f"{segment.text}\n"
         )
+
+def format_time(seconds):
+    ms = round(seconds * 1000)
+
+    hours = ms // 3600000
+    ms -= hours * 3600000
+    minutes = ms // 60000
+    ms -= minutes * 60000
+    seconds = ms // 1000
+    ms -= seconds * 1000
+
+    return f"{hours:02d}:{minutes:02d}:{seconds:02d},{ms:03d}"
