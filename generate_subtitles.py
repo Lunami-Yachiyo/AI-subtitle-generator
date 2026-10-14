@@ -1,5 +1,5 @@
 from faster_whisper import WhisperModel
-
+from pathlib import Path
 
 def main(file_name : str):
     model = WhisperModel(
@@ -15,7 +15,8 @@ def main(file_name : str):
 
     print(f"Detected language: {info.language}")
 
-    with open(f'output/{file_name}.srt', 'w') as f:
+    Path("output").mkdir(parents=True, exist_ok=True)
+    with open(f'output/{file_name}.srt', 'w', encoding="utf-8") as f:
 
         for idx, segment in enumerate(segments, start=1):
             f.write(
