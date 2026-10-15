@@ -19,6 +19,7 @@ def main(file_name : str):
     with open(f'output/{file_name}.srt', 'w', encoding="utf-8") as f:
 
         for idx, segment in enumerate(segments, start=1):
+            print(idx)
             f.write(
                 f"{idx}\n"
                 f"{format_time(segment.start)} --> {format_time(segment.end)}\n"
