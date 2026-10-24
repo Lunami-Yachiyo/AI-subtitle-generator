@@ -2,20 +2,15 @@ import yt_dlp
 from pathlib import Path
 
 
-def main(url: str, output_dir: str = "input"):
+def main(url: str, output_path: str = "input"):
 
-    output_path = Path(output_dir)
+    output_path = Path(output_path)
     output_path.mkdir(parents=True, exist_ok=True)
 
-    ydl_opts = {
-        # 优先获取最佳音频
+    options = {
         "format": "bestaudio/best",
-
-        # 文件保存格式：
-        # input/视频标题.扩展名
         "outtmpl": str(output_path / "%(title)s.%(ext)s"),
-
-        # 用 ffmpeg 转换为 mp3
+        "noplaylist": True,
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",
@@ -23,12 +18,9 @@ def main(url: str, output_dir: str = "input"):
                 "preferredquality": "192",
             }
         ],
-
-        # 不下载整个播放列表
-        "noplaylist": True,
     }
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    with yt_dlp.YoutubeDL(options) as ydl:
         info = ydl.extract_info(url, download=True)
 
         title = info.get("title", "unknown")

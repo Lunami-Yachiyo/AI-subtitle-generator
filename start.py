@@ -1,8 +1,11 @@
 import argparse
+import sys
+from PySide6.QtWidgets import QApplication
 
 import generate_subtitles
 import download_youtube_files
 import subtitle_editor
+import gui
 
 def main():
     parser = argparse.ArgumentParser()
@@ -23,7 +26,15 @@ def test_subtitle_editor():
     # Close .srt file
     subtitle_editor.save_subtitles(subs, title=file_name)
 
+def test_gui():
+    app = QApplication(sys.argv)
+
+    window = gui.MainWindow()
+    window.show()
+
+    sys.exit(app.exec())
 
 if __name__ == '__main__':
-    main()
+    #main()
     #test_subtitle_editor()
+    test_gui()
